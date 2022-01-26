@@ -1,25 +1,24 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 
+#include "GameComponets.h"
+
 int main() {
 	sf::RenderWindow app(sf::VideoMode(640, 480), "test");
 
-	sf::CircleShape shape(100, 50);
-	shape.setFillColor(sf::Color::Green);
+	sf::VertexArray line(sf::PrimitiveType::LineStrip, 4);
+	line[0].position = sf::Vector2f(20, 20);
+	line[1].position = sf::Vector2f(320, 480);
+	line[2].position = sf::Vector2f(500, 400);
+	line[3].position = sf::Vector2f(500, 100);
 
-	sf::Texture test_texture;
-	test_texture.loadFromFile("Resource/GameNote.png");
+	float angle = 0;
 
-	sf::Sprite test(test_texture);
-	test.setScale(sf::Vector2f(.5f, .5f));
-
-	sf::Music chase;
-	chase.openFromFile("Resource/CHASE.ogg");
-
-	chase.play();
 	while (app.isOpen())
 	{
 		sf::Event appEvent;
+
+		gc::Ray ray = gc::Ray(sf::Vector2f(320, 240), angle, 100);
 
 		while (app.pollEvent(appEvent))
 		{
@@ -28,9 +27,13 @@ int main() {
 
 		app.clear();
 
-		app.draw(test);
+		//app.draw(line);
+
+		app.draw(ray.vertex);
 
 		app.display();
+
+		angle += 0.001f;
 	}
 
 	return EXIT_SUCCESS;
