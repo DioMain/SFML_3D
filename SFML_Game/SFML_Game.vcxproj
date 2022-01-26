@@ -144,6 +144,12 @@
   <ItemGroup>
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resource\CHASE.ogg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resource\GameNote.png" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
