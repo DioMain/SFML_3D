@@ -4,6 +4,7 @@
 #include "GameComponets.h"
 #include "Player.h"
 #include "GlobalVars.h"
+#include "GameMap.h"
 #include "Render.h"
 
 int main() {
@@ -17,12 +18,9 @@ int main() {
 	chase.openFromFile("Resource/CHASE.ogg");
 	chase.setVolume(15);
 
-	gc::Camera cam = gc::Camera(sf::Vector2f(), 1, 100, 0, 20);
+	gc::Camera cam = gc::Camera(sf::Vector2f(), 1, 250, 0, 25);
 
-	sf::RectangleShape rect(sf::Vector2f(100, 100));
-	rect.setPosition(sf::Vector2f(100, 100));
-
-	gv::CastRects.push_back(&rect);
+	map::init();
 
 	player::init(&app, cam, sf::Vector2f(320, 240), 0, 4);
 
