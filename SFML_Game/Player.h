@@ -2,7 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "GameComponets.h"
+#include "GameComponents.h"
 #include "GlobalVars.h"
 #include "Mathf.h"
 

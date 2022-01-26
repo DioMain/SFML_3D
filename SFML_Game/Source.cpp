@@ -1,7 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 
-#include "GameComponets.h"
+#include "GameComponents.h"
 #include "Player.h"
 #include "GlobalVars.h"
 #include "GameMap.h"
@@ -13,18 +13,18 @@ int main() {
 
 	sf::Image icon;
 	icon.loadFromFile("Resource/icon.png");
+	
+	//sf::Music chase;
+	//chase.openFromFile("Resource/CHASE.ogg");
+	//chase.setVolume(15);
 
-	sf::Music chase;
-	chase.openFromFile("Resource/CHASE.ogg");
-	chase.setVolume(15);
-
-	gc::Camera cam = gc::Camera(sf::Vector2f(), 1, 250, 0, 25);
-
-	map::init();
+	gc::Camera cam = gc::Camera(sf::Vector2f(), 1, 250, 0, 60);
 
 	player::init(&app, cam, sf::Vector2f(320, 240), 0, 4);
 
-	chase.play();
+	map::init();
+
+	//chase.play();
 	while (app.isOpen())
 	{
 		gv::update(&app);
@@ -32,6 +32,8 @@ int main() {
 		player::update();
 
 		player::input();
+
+		map::update();
 
 		sf::Event appEvent;
 		while (app.pollEvent(appEvent))

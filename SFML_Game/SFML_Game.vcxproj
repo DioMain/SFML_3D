@@ -152,7 +152,7 @@
     <Image Include="Resource\icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GameComponets.h" />
+    <ClInclude Include="GameComponents.h" />
     <ClInclude Include="GameMap.h" />
     <ClInclude Include="GlobalVars.h" />
     <ClInclude Include="Mathf.h" />

@@ -16,6 +16,7 @@ namespace gc {
 
 		float angle;
 		float len;
+		float endLen;
 
 		Ray() {
 			vertex = sf::VertexArray();
@@ -23,14 +24,15 @@ namespace gc {
 
 			angle = 0;
 			len = 0;
+			endLen = len;
 		}
 
 		Ray(sf::Vector2f pos, float angle, float rayLen = 10) {
 			vertex = sf::VertexArray(sf::Lines, 2);
 
-			vertex[0].position = pos;
-			vertex[1].position.x = pos.x + rayLen * cos(angle);
-			vertex[1].position.y = pos.y + rayLen * sin(angle);
+			//vertex[0].position = pos;
+			//vertex[1].position.x = pos.x + rayLen * cos(angle);
+			//vertex[1].position.y = pos.y + rayLen * sin(angle);
 
 			this->pos = pos;
 			this->angle = angle;
@@ -53,9 +55,14 @@ namespace gc {
 				for (int r = 0; r < gv::CastRects.size(); r++)
 				{
 					if (vertex[1].position.x > (*gv::CastRects[r]).getPosition().x && vertex[1].position.x <= (*gv::CastRects[r]).getPosition().x + (*gv::CastRects[r]).getSize().x
-						&& vertex[1].position.y > (*gv::CastRects[r]).getPosition().y && vertex[1].position.y <= (*gv::CastRects[r]).getPosition().y + (*gv::CastRects[r]).getSize().y) return;
+						&& vertex[1].position.y > (*gv::CastRects[r]).getPosition().y && vertex[1].position.y <= (*gv::CastRects[r]).getPosition().y + (*gv::CastRects[r]).getSize().y) {
+						endLen = i;
+						return;
+					}
 				}
 			}
+
+			endLen = len;
 		}
 	};
 

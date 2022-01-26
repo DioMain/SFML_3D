@@ -7,6 +7,7 @@ namespace gv {
 	static sf::Vector2f MouseWorldPos;
 
 	static std::vector<sf::RectangleShape*> CastRects;
+	static std::vector<sf::RectangleShape*> RenderScreen;
 
 	void update(sf::RenderWindow* app) {
 		sf::Mouse mouse;
