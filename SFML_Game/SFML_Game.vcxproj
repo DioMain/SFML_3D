@@ -153,9 +153,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameComponets.h" />
+    <ClInclude Include="GameMap.h" />
     <ClInclude Include="GlobalVars.h" />
     <ClInclude Include="Mathf.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="Render.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

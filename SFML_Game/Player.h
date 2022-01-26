@@ -8,7 +8,7 @@
 
 namespace player {
 
-	static gc::Ray ViewRay;
+	static gc::Camera CAM;
 	static float VievAngle;
 
 	static float Speed = 2;
@@ -17,24 +17,23 @@ namespace player {
 
 	static sf::Vector2f position;
 
-	void init(sf::RenderWindow* app, sf::Vector2f startPos, float startVievAngle = 0, float startSpeed = 2) {
+	void init(sf::RenderWindow* app, gc::Camera startCAM, sf::Vector2f startPos, float startVievAngle = 0, float startSpeed = 2) {
 		position = startPos;
 		VievAngle = startVievAngle;
 		Speed = startSpeed;
 
-		ViewRay = gc::Ray(position, VievAngle, (*app).getSize().x);
-		ViewRay.vertex[0].color = sf::Color::Red;
+		CAM = startCAM;
 
-		Toward = sf::CircleShape(25, 50);
+		Toward = sf::CircleShape(10, 50);
 		Toward.setPosition(sf::Vector2f(position.x - Toward.getRadius(), position.y - Toward.getRadius()));
 		Toward.setFillColor(sf::Color::Green);
 	}
 
 	void update() {
-		ViewRay.pos = position;
-		ViewRay.angle = VievAngle;
+		CAM.DIRECTION = VievAngle;
+		CAM.POSITION = position;
 
-		ViewRay.update();
+		CAM.update();
 
 		Toward.setPosition(sf::Vector2f(position.x - Toward.getRadius(), position.y - Toward.getRadius()));
 	}

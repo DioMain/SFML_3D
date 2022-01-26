@@ -1,9 +1,12 @@
 #pragma once
 
+#include <vector>
 #include <SFML/Graphics.hpp>
 
 namespace gv {
 	static sf::Vector2f MouseWorldPos;
+
+	static std::vector<sf::RectangleShape*> CastRects;
 
 	void update(sf::RenderWindow* app) {
 		sf::Mouse mouse;

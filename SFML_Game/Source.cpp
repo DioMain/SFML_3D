@@ -4,6 +4,7 @@
 #include "GameComponets.h"
 #include "Player.h"
 #include "GlobalVars.h"
+#include "Render.h"
 
 int main() {
 	sf::RenderWindow app(sf::VideoMode(640, 480), "Game");
@@ -11,14 +12,19 @@ int main() {
 
 	sf::Image icon;
 	icon.loadFromFile("Resource/icon.png");
-	
-	app.setIcon(128, 128, icon.getPixelsPtr());
-
-	player::init(&app, sf::Vector2f(320, 240), 0, 4);
 
 	sf::Music chase;
 	chase.openFromFile("Resource/CHASE.ogg");
 	chase.setVolume(15);
+
+	gc::Camera cam = gc::Camera(sf::Vector2f(), 1, 100, 0, 20);
+
+	sf::RectangleShape rect(sf::Vector2f(100, 100));
+	rect.setPosition(sf::Vector2f(100, 100));
+
+	gv::CastRects.push_back(&rect);
+
+	player::init(&app, cam, sf::Vector2f(320, 240), 0, 4);
 
 	chase.play();
 	while (app.isOpen())
@@ -35,12 +41,7 @@ int main() {
 			if (appEvent.type == sf::Event::Closed) app.close();
 		}
 
-		app.clear();
-
-		app.draw(player::ViewRay.vertex);
-		app.draw(player::Toward);
-
-		app.display();
+		render::update(&app);
 	}
 
 	return EXIT_SUCCESS;

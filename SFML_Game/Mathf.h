@@ -3,17 +3,16 @@
 #include <SFML/Graphics.hpp>
 
 namespace mathf {
-
 	const float pi = 3.14f;
 	const float pi2 = 2 * 3.14f;
 
 	const float RadToDeg = 180 / pi;
 
-	float lerp() {
-		return 0;
+	float lerp(float a, float b, float c) {
+		return a * (1 - c) + b * c;
 	}
 
-	namespace vector{
+	namespace vector {
 		float len(sf::Vector2f a) {
 			return sqrt(a.x * a.x + a.y * a.y);
 		}
