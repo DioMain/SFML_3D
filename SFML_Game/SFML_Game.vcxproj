@@ -149,10 +149,13 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resource\GameNote.png" />
+    <Image Include="Resource\icon.png" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameComponets.h" />
+    <ClInclude Include="GlobalVars.h" />
     <ClInclude Include="Mathf.h" />
+    <ClInclude Include="Player.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
