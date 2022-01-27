@@ -48,5 +48,9 @@ namespace mathf {
 		sf::Vector2f create(sf::Vector2f a, sf::Vector2f b) {
 			return sf::Vector2f(b.x - a.x, b.y - a.y);
 		}
+
+		sf::Vector2f mapping(sf::Vector2f a, float tile) {
+			return sf::Vector2f(floor(a.x / tile) * tile, floor(a.y / tile) * tile);
+		}
 	}
 }

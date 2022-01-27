@@ -3,8 +3,10 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
 #include <iostream>
+#include <thread>
 
 #include "GlobalVars.h"
+#include "Mathf.h"
 
 namespace gc {
 	class Ray
@@ -19,16 +21,19 @@ namespace gc {
 		float len;
 		float endLen;
 
+		float Tile;
+
 		int step;
 
-		Ray() : angle(0), len(0), step(1), endLen(len), vertex(sf::VertexArray()), pos(sf::Vector2f()) { }
+		Ray() : angle(0), len(0), step(1), Tile(0), endLen(len), vertex(sf::VertexArray()), pos(sf::Vector2f()) { }
 
-		Ray(sf::Vector2f pos, float angle, float rayLen = 10, int step = 1) {
+		Ray(sf::Vector2f pos, float angle, float rayLen = 10, int step = 1, float Tile = 0) {
 			vertex = sf::VertexArray(sf::Lines, 2);
 
 			this->pos = pos;
 			this->angle = angle;
 			this->step = step;
+			this->Tile = Tile;
 			len = rayLen;
 		}
 
@@ -68,18 +73,20 @@ namespace gc {
 		float FOV;
 		float DEPTH;
 		float DIRECTION;
+		float TILE;
 
 		int RAYS_NUM;
 		int RAY_STEP;
 
-		Camera() : FOV(0), DIRECTION(0), RAYS_NUM(0), RAY_STEP(1), POSITION(sf::Vector2f()) {
+		Camera() : FOV(0), DIRECTION(0), TILE(0), RAYS_NUM(0), RAY_STEP(1), POSITION(sf::Vector2f()) {
 			RAYS_INIT();
 		}
 
-		Camera(sf::Vector2f POSITION, float FOV, float DEPTH, float DIRECTION, int RAYS_NUM , int RAY_STEP) {
+		Camera(sf::Vector2f POSITION, float FOV, float DEPTH, float DIRECTION, float TILE, int RAYS_NUM , int RAY_STEP) {
 			this->FOV = FOV;
 			this->DIRECTION = DIRECTION;
 			this->DEPTH = DEPTH;
+			this->TILE = TILE;
 
 			this->POSITION = POSITION;
 
@@ -114,8 +121,10 @@ namespace gc {
 		void RAYS_UPDATE() {
 			float DELTA_ANGLE = FOV / RAYS_NUM;
 
-			for (int i = 0; i < RAYS_NUM; i++)
-			{
+			for (int i = 0; i < RAYS_NUM; i++) {
+
+				rays[i].Tile = TILE;
+
 				rays[i].pos = POSITION;
 
 				rays[i].step = RAY_STEP;
