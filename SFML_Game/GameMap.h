@@ -9,18 +9,19 @@
 
 namespace map {
 	const int MAP_SIZE_X = 10;
-	const int MAP_SIZE_Y = 8;
+	const int MAP_SIZE_Y = 9;
 
-	static float TILE = 500;
+	static float TILE = 350;
 
 	static std::string CHAR_MAP[MAP_SIZE_Y]{
-		{"#########."},
-		{".........."},
-		{"..#......."},
-		{".........."},
-		{".........."},
-		{".........."},
-		{".#......#."},
+		{"##########"},
+		{".........#"},
+		{".#######.#"},
+		{".#.......#"},
+		{".##....#.#"},
+		{"..######.#"},
+		{".#.......#"},
+		{".........#"},
 		{"##########"}
 	};
 
@@ -31,8 +32,8 @@ namespace map {
 			{
 				if (CHAR_MAP[y][x] == '.') continue;
 
-				sf::RectangleShape* r = new sf::RectangleShape(sf::Vector2f(64, 60));
-				(*r).setPosition(sf::Vector2f(64 * x, 60 * y));
+				sf::RectangleShape* r = new sf::RectangleShape(sf::Vector2f(64, 64));
+				(*r).setPosition(sf::Vector2f(64 * x, 64 * y));
 				(*r).setFillColor(sf::Color(200, 200, 200));
 
 				gv::CastRects.push_back(r);
@@ -50,15 +51,21 @@ namespace map {
 	}
 
 	void update() {
-		float d = player::CAM.RAYS_NUM / (2 * tan(player::CAM.FOV / 2));
+		float d = player::CAM.RAYS_NUM / (3 * tan(player::CAM.FOV / 2));
 
 		for (int i = 0; i < player::CAM.RAYS_NUM; i++)
 		{
+			float h = (d * TILE) / (player::CAM.getRay(i).endLen * cos(player::VievAngle - player::CAM.getRay(i).angle));
+
 			if (player::CAM.getRay(i).len - player::CAM.getRay(i).endLen > 0) 
-				(*gv::RenderScreen[i]).setSize(sf::Vector2f((*gv::RenderScreen[i]).getSize().x, (d * TILE) / player::CAM.getRay(i).endLen));
+				(*gv::RenderScreen[i]).setSize(sf::Vector2f((*gv::RenderScreen[i]).getSize().x, h));
 			else 
 				(*gv::RenderScreen[i]).setSize(sf::Vector2f((*gv::RenderScreen[i]).getSize().x, 0));
 			
+			if (h > 200) (*gv::RenderScreen[i]).setFillColor(sf::Color(0 + (h / 3), 0 + (h / 5), 0));
+			else if (h > 150) (*gv::RenderScreen[i]).setFillColor(sf::Color(0 + (h / 6), 0 + (h / 8), 0));
+			else (*gv::RenderScreen[i]).setFillColor(sf::Color(0 + (h / 10), 0 + (h / 12), 0));
+
 			(*gv::RenderScreen[i]).setPosition(sf::Vector2f((640 / player::CAM.RAYS_NUM) * i, 240 - ((*gv::RenderScreen[i]).getSize().y / 2)));
 		}
 	}

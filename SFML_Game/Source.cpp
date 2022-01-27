@@ -14,20 +14,20 @@ int main() {
 	sf::Image icon;
 	icon.loadFromFile("Resource/icon.png");
 	
-	//sf::Music chase;
-	//chase.openFromFile("Resource/CHASE.ogg");
-	//chase.setVolume(15);
+	sf::Music chase;
+	chase.openFromFile("Resource/CHASE.ogg");
+	chase.setVolume(15);
 
-	gc::Camera cam = gc::Camera(sf::Vector2f(), 1, 250, 0, 60);
+	gc::Camera cam = gc::Camera(sf::Vector2f(), 1, 150, 0, 80, 2);
 
-	player::init(&app, cam, sf::Vector2f(320, 240), 0, 4);
+	player::init(&app, cam, sf::Vector2f(320, 240), 0, 2);
 
 	map::init();
 
-	//chase.play();
+	chase.play();
 	while (app.isOpen())
 	{
-		gv::update(&app);
+		gv::UPDATE_MOUSE_POS(&app);
 
 		player::update();
 
@@ -42,6 +42,8 @@ int main() {
 		}
 
 		render::update(&app);
+
+		gv::APPLY_MOUSE_POS();
 	}
 
 	return EXIT_SUCCESS;

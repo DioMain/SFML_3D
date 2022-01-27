@@ -10,12 +10,20 @@ namespace render {
 	void update(sf::RenderWindow* app) {
 		(*app).clear();
 
+		sf::RectangleShape floorShape(sf::Vector2f(640, 180));
+		floorShape.setPosition(sf::Vector2f(0, 480 - 180));
+		floorShape.setFillColor(sf::Color(30, 30, 30));
+
+		(*app).draw(floorShape);
+
 		for (int i = 0; i < gv::RenderScreen.size(); i++) (*app).draw(*gv::RenderScreen[i]);
 
-		for (int i = 0; i < gv::CastRects.size(); i++) (*app).draw(*gv::CastRects[i]);
-		(*app).draw(player::Toward);
+		if (gv::DEBAG_MODE) {
+			for (int i = 0; i < gv::CastRects.size(); i++) (*app).draw(*gv::CastRects[i]);
+			(*app).draw(player::Toward);
 
-		for (int i = 0; i < player::CAM.RAYS_NUM; i++) (*app).draw(player::CAM.getRay(i).vertex);
+			for (int i = 0; i < player::CAM.RAYS_NUM; i++) (*app).draw(player::CAM.getRay(i).vertex);
+		}
 
 		(*app).display();
 	}

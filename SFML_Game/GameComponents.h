@@ -2,6 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <vector>
+#include <iostream>
 
 #include "GlobalVars.h"
 
@@ -18,24 +19,24 @@ namespace gc {
 		float len;
 		float endLen;
 
+		int step;
+
 		Ray() {
 			vertex = sf::VertexArray();
 			pos = sf::Vector2f();
 
 			angle = 0;
 			len = 0;
+			step = 1;
 			endLen = len;
 		}
 
-		Ray(sf::Vector2f pos, float angle, float rayLen = 10) {
+		Ray(sf::Vector2f pos, float angle, float rayLen = 10, int step = 1) {
 			vertex = sf::VertexArray(sf::Lines, 2);
-
-			//vertex[0].position = pos;
-			//vertex[1].position.x = pos.x + rayLen * cos(angle);
-			//vertex[1].position.y = pos.y + rayLen * sin(angle);
 
 			this->pos = pos;
 			this->angle = angle;
+			this->step = step;
 			len = rayLen;
 		}
 
@@ -47,7 +48,7 @@ namespace gc {
 	private:
 
 		void CAST() {
-			for (int i = 0; i < len; i++)
+			for (int i = 0; i < len; i += step)
 			{
 				vertex[1].position.x = pos.x + i * cos(angle);
 				vertex[1].position.y = pos.y + i * sin(angle);
@@ -77,6 +78,7 @@ namespace gc {
 		float DIRECTION;
 
 		int RAYS_NUM;
+		int RAY_STEP;
 
 		Camera() {
 			FOV = 0;
@@ -86,11 +88,12 @@ namespace gc {
 			POSITION = sf::Vector2f();
 
 			RAYS_NUM = 0;
+			RAY_STEP = 1;
 
 			RAYS_INIT();
 		}
 
-		Camera(sf::Vector2f POSITION, float FOV, float DEPTH, float DIRECTION, int RAYS_NUM) {
+		Camera(sf::Vector2f POSITION, float FOV, float DEPTH, float DIRECTION, int RAYS_NUM , int RAY_STEP) {
 			this->FOV = FOV;
 			this->DIRECTION = DIRECTION;
 			this->DEPTH = DEPTH;
@@ -98,6 +101,7 @@ namespace gc {
 			this->POSITION = POSITION;
 
 			this->RAYS_NUM = RAYS_NUM;
+			this->RAY_STEP = RAY_STEP;
 
 			RAYS_INIT();
 		}
@@ -130,6 +134,8 @@ namespace gc {
 			for (int i = 0; i < RAYS_NUM; i++)
 			{
 				rays[i].pos = POSITION;
+
+				rays[i].step = RAY_STEP;
 
 				rays[i].angle = (DIRECTION - (FOV / 2)) + (DELTA_ANGLE * i);
 

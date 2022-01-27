@@ -12,15 +12,18 @@ namespace player {
 	static float VievAngle;
 
 	static float Speed = 2;
+	static float AntiSensivity = 200;
+	
 
 	static sf::CircleShape Toward;
 
 	static sf::Vector2f position;
 
-	void init(sf::RenderWindow* app, gc::Camera startCAM, sf::Vector2f startPos, float startVievAngle = 0, float startSpeed = 2) {
+	void init(sf::RenderWindow* app, gc::Camera startCAM, sf::Vector2f startPos, float startVievAngle = 0, float startSpeed = 2, float startAntiSensivity = 200) {
 		position = startPos;
 		VievAngle = startVievAngle;
 		Speed = startSpeed;
+		AntiSensivity = startAntiSensivity;
 
 		CAM = startCAM;
 
@@ -40,12 +43,27 @@ namespace player {
 
 	void input() {
 		sf::Keyboard key;
+		sf::Mouse mouse;
 
-		if (key.isKeyPressed(sf::Keyboard::W)) position.y -= 1 * Speed;
-		if (key.isKeyPressed(sf::Keyboard::S)) position.y += 1 * Speed;
-		if (key.isKeyPressed(sf::Keyboard::D)) position.x += 1 * Speed;
-		if (key.isKeyPressed(sf::Keyboard::A)) position.x -= 1 * Speed;
+		if (key.isKeyPressed(sf::Keyboard::W)) {
+			position.x = position.x + Speed * cos(VievAngle);
+			position.y = position.y + Speed * sin(VievAngle);
+		}
+		if (key.isKeyPressed(sf::Keyboard::S)) {
+			position.x = position.x - Speed * cos(CAM.DIRECTION);
+			position.y = position.y - Speed * sin(CAM.DIRECTION);
+		}
+		if (key.isKeyPressed(sf::Keyboard::D)) {
+			position.x = position.x - Speed * sin(CAM.DIRECTION);
+			position.y = position.y + Speed * cos(CAM.DIRECTION);
+		}
+		if (key.isKeyPressed(sf::Keyboard::A)) {
+			position.x = position.x + Speed * sin(CAM.DIRECTION);
+			position.y = position.y - Speed * cos(CAM.DIRECTION);
+		}
 
-		VievAngle = -atan2(gv::MouseWorldPos.x - position.x, gv::MouseWorldPos.y - position.y) + (90 / mathf::RadToDeg);
+		if (key.isKeyPressed(sf::Keyboard::F1)) gv::DEBAG_MODE = (gv::DEBAG_MODE) ? false : true;
+
+		VievAngle += gv::MOUSE_POS_DELTA.x / 100;
 	}
 }
