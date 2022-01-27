@@ -51,7 +51,7 @@ namespace map {
 	}
 
 	void update() {
-		float d = player::CAM.RAYS_NUM / (3 * tan(player::CAM.FOV / 2));
+		float d = player::CAM.RAYS_NUM / (2.5f * tan(player::CAM.FOV / 2));
 
 		for (int i = 0; i < player::CAM.RAYS_NUM; i++)
 		{

@@ -18,7 +18,7 @@ int main() {
 	chase.openFromFile("Resource/CHASE.ogg");
 	chase.setVolume(15);
 
-	gc::Camera cam = gc::Camera(sf::Vector2f(), 1, 150, 0, 80, 2);
+	gc::Camera cam = gc::Camera(sf::Vector2f(), 1, 200, 0, 75, 2);
 
 	player::init(&app, cam, sf::Vector2f(320, 240), 0, 2);
 
