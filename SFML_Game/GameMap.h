@@ -11,7 +11,7 @@ namespace map {
 	const int MAP_SIZE_X = 10;
 	const int MAP_SIZE_Y = 9;
 
-	static float TILE = 350;
+	static float TILE = 200;
 
 	static std::string CHAR_MAP[MAP_SIZE_Y]{
 		{"##########"},
@@ -42,8 +42,8 @@ namespace map {
 
 		for (int i = 0; i < player::CAM.RAYS_NUM; i++)
 		{
-			sf::RectangleShape* r = new sf::RectangleShape(sf::Vector2f(640 / player::CAM.RAYS_NUM, 10));
-			(*r).setPosition(sf::Vector2f((640 / player::CAM.RAYS_NUM) * i, 240 - ((*r).getSize().y / 2)));
+			sf::RectangleShape* r = new sf::RectangleShape(sf::Vector2f(1280.f / player::CAM.RAYS_NUM, 10));
+			(*r).setPosition(sf::Vector2f((1280.f / player::CAM.RAYS_NUM) * i, 240 - ((*r).getSize().y / 2)));
 			(*r).setFillColor(sf::Color(255, 140, 0));
 
 			gv::RenderScreen.push_back(r);
@@ -66,7 +66,7 @@ namespace map {
 			else if (h > 150) (*gv::RenderScreen[i]).setFillColor(sf::Color(0 + (h / 6), 0 + (h / 8), 0));
 			else (*gv::RenderScreen[i]).setFillColor(sf::Color(0 + (h / 10), 0 + (h / 12), 0));
 
-			(*gv::RenderScreen[i]).setPosition(sf::Vector2f((640 / player::CAM.RAYS_NUM) * i, 240 - ((*gv::RenderScreen[i]).getSize().y / 2)));
+			(*gv::RenderScreen[i]).setPosition(sf::Vector2f((*gv::RenderScreen[i]).getPosition().x, 240 - ((*gv::RenderScreen[i]).getSize().y / 2)));
 		}
 	}
 }

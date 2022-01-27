@@ -19,6 +19,9 @@
     <Filter Include="Файлы ресурсов\Sprites">
       <UniqueIdentifier>{13e9a19c-b082-4ec9-8327-cc288c8fcff6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Файлы ресурсов\Fonts">
+      <UniqueIdentifier>{9d9c8c2d-ba5a-40e0-810a-cf06b068299a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp">
@@ -57,5 +60,10 @@
     <ClInclude Include="GameMap.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="Resource\font.ttf">
+      <Filter>Файлы ресурсов\Fonts</Filter>
+    </Font>
   </ItemGroup>
 </Project>

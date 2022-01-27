@@ -25,6 +25,14 @@ namespace render {
 			for (int i = 0; i < player::CAM.RAYS_NUM; i++) (*app).draw(player::CAM.getRay(i).vertex);
 		}
 
+		sf::Font font0;
+		font0.loadFromFile("Resource/font.ttf");
+
+		sf::Text FramerateTxt("FPS: " + mathf::toString(player::Framerate.getFPS()), font0, 20);
+		FramerateTxt.setFillColor(sf::Color::Red);
+
+		(*app).draw(FramerateTxt);
+
 		(*app).display();
 	}
 }

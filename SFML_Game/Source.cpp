@@ -8,7 +8,7 @@
 #include "Render.h"
 
 int main() {
-	sf::RenderWindow app(sf::VideoMode(640, 480), "Game");
+	sf::RenderWindow app(sf::VideoMode(1280, 720), "Game");
 	app.setVerticalSyncEnabled(true);
 
 	sf::Image icon;
@@ -16,9 +16,9 @@ int main() {
 	
 	sf::Music chase;
 	chase.openFromFile("Resource/CHASE.ogg");
-	chase.setVolume(15);
+	chase.setVolume(10);
 
-	gc::Camera cam = gc::Camera(sf::Vector2f(), 1, 200, 0, 75, 2);
+	gc::Camera cam = gc::Camera(sf::Vector2f(), 1, 200, 0, 100, 1);
 
 	player::init(&app, cam, sf::Vector2f(320, 240), 0, 2);
 
@@ -43,7 +43,7 @@ int main() {
 
 		render::update(&app);
 
-		gv::APPLY_MOUSE_POS();
+		gv::APPLY_LAST();
 	}
 
 	return EXIT_SUCCESS;

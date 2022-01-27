@@ -14,6 +14,7 @@ namespace player {
 	static float Speed = 2;
 	static float AntiSensivity = 200;
 	
+	static gc::FPS Framerate;
 
 	static sf::CircleShape Toward;
 
@@ -33,6 +34,8 @@ namespace player {
 	}
 
 	void update() {
+		Framerate.update();
+
 		CAM.DIRECTION = VievAngle;
 		CAM.POSITION = position;
 

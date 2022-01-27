@@ -24,6 +24,7 @@
     <ProjectGuid>{da3cbe80-8dfb-4ad9-bc5f-a6637426fa4e}</ProjectGuid>
     <RootNamespace>SFMLGame</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>SFML_3D</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -158,6 +159,9 @@
     <ClInclude Include="Mathf.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Render.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="Resource\font.ttf" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

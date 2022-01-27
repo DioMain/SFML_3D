@@ -21,15 +21,7 @@ namespace gc {
 
 		int step;
 
-		Ray() {
-			vertex = sf::VertexArray();
-			pos = sf::Vector2f();
-
-			angle = 0;
-			len = 0;
-			step = 1;
-			endLen = len;
-		}
+		Ray() : angle(0), len(0), step(1), endLen(len), vertex(sf::VertexArray()), pos(sf::Vector2f()) { }
 
 		Ray(sf::Vector2f pos, float angle, float rayLen = 10, int step = 1) {
 			vertex = sf::VertexArray(sf::Lines, 2);
@@ -80,16 +72,7 @@ namespace gc {
 		int RAYS_NUM;
 		int RAY_STEP;
 
-		Camera() {
-			FOV = 0;
-			DEPTH = 0;
-			DIRECTION = 0;
-
-			POSITION = sf::Vector2f();
-
-			RAYS_NUM = 0;
-			RAY_STEP = 1;
-
+		Camera() : FOV(0), DIRECTION(0), RAYS_NUM(0), RAY_STEP(1), POSITION(sf::Vector2f()) {
 			RAYS_INIT();
 		}
 
@@ -143,6 +126,41 @@ namespace gc {
 
 				rays[i].update();
 			}
+		}
+	};
+
+	//https://gist.github.com/kenpower/7233967
+	class FPS
+	{
+	public:
+		/// @brief Constructor with initialization.
+		///
+		FPS() : mFrame(0), mFps(0) {}
+
+		/// @brief Update the frame count.
+		/// 
+
+
+		/// @brief Get the current FPS count.
+		/// @return FPS count.
+		const unsigned int getFPS() const { return mFps; }
+
+	private:
+		unsigned int mFrame;
+		unsigned int mFps;
+		sf::Clock mClock;
+
+	public:
+		void update()
+		{
+			if (mClock.getElapsedTime().asSeconds() >= 1.f)
+			{
+				mFps = mFrame;
+				mFrame = 0;
+				mClock.restart();
+			}
+
+			++mFrame;
 		}
 	};
 }
