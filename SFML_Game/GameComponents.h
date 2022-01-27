@@ -24,7 +24,7 @@ namespace gc {
 
 		Ray() : angle(0), len(0), step(1), endLen(len), vertex(sf::VertexArray()), pos(sf::Vector2f()) { }
 
-		Ray(sf::Vector2f pos, float angle, float rayLen = 10, int step = 1, float Tile = 0) {
+		Ray(sf::Vector2f pos, float angle, float rayLen = 10, int step = 1) {
 			vertex = sf::VertexArray(sf::Lines, 2);
 
 			this->pos = pos;
@@ -77,7 +77,7 @@ namespace gc {
 			RAYS_INIT();
 		}
 
-		Camera(sf::Vector2f POSITION, float FOV, float DEPTH, float DIRECTION, float TILE, int RAYS_NUM , int RAY_STEP) {
+		Camera(sf::Vector2f POSITION, float FOV, float DEPTH, float DIRECTION, int RAYS_NUM , int RAY_STEP) {
 			this->FOV = FOV;
 			this->DIRECTION = DIRECTION;
 			this->DEPTH = DEPTH;
