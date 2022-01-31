@@ -13,6 +13,7 @@ namespace gv {
 
 	static bool DEBAG_MODE = false;
 
+	int st = 0;
 	void UPDATE_MOUSE_POS(sf::RenderWindow* app) {
 		sf::Mouse mouse;
 

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include <vector>
 
 #include "GameComponents.h"
 #include "GlobalVars.h"
@@ -12,7 +13,7 @@ namespace player {
 	static float VievAngle;
 
 	static float Speed = 2;
-	static float AntiSensivity = 200;
+	static float AntiSensivity = 100;
 	
 	static gc::FPS Framerate;
 
@@ -46,7 +47,6 @@ namespace player {
 
 	void input() {
 		sf::Keyboard key;
-		sf::Mouse mouse;
 
 		if (key.isKeyPressed(sf::Keyboard::W)) {
 			position.x = position.x + Speed * cos(VievAngle);
@@ -64,9 +64,15 @@ namespace player {
 			position.x = position.x + Speed * sin(CAM.DIRECTION);
 			position.y = position.y - Speed * cos(CAM.DIRECTION);
 		}
+		if (key.isKeyPressed(sf::Keyboard::Right)) {
+			VievAngle += 0.05f;
+		}
+		if (key.isKeyPressed(sf::Keyboard::Left)) {
+			VievAngle -= 0.05f;
+		}
 
 		if (key.isKeyPressed(sf::Keyboard::F1)) gv::DEBAG_MODE = (gv::DEBAG_MODE) ? false : true;
 
-		VievAngle += gv::MOUSE_POS_DELTA.x / 100;
+		VievAngle += gv::MOUSE_POS_DELTA.x / AntiSensivity;
 	}
 }

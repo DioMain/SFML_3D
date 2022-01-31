@@ -11,7 +11,7 @@ namespace map {
 	const int MAP_SIZE_X = 10;
 	const int MAP_SIZE_Y = 9;
 
-	static float TILE = 200;
+	static float TILE = 100;
 
 	static std::string CHAR_MAP[MAP_SIZE_Y]{
 		{"##########"},
@@ -55,9 +55,9 @@ namespace map {
 
 		for (int i = 0; i < player::CAM.RAYS_NUM; i++)
 		{
-			float h = (d * TILE) / (player::CAM.getRay(i).endLen * cos(player::VievAngle - player::CAM.getRay(i).angle));
+			float h = (d * TILE) / (player::CAM.getRay(i).lapLen * cos(player::VievAngle - player::CAM.getRay(i).angle));
 
-			if (player::CAM.getRay(i).len - player::CAM.getRay(i).endLen > 0) 
+			if (player::CAM.getRay(i).len - player::CAM.getRay(i).lapLen > 0) 
 				(*gv::RenderScreen[i]).setSize(sf::Vector2f((*gv::RenderScreen[i]).getSize().x, h));
 			else 
 				(*gv::RenderScreen[i]).setSize(sf::Vector2f((*gv::RenderScreen[i]).getSize().x, 0));
