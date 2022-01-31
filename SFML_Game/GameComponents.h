@@ -3,7 +3,6 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
 #include <iostream>
-#include <vector>
 
 #include "GlobalVars.h"
 #include "Mathf.h"
