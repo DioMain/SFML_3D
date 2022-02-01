@@ -10,10 +10,14 @@ namespace render {
 	void update(sf::RenderWindow* app) {
 		(*app).clear();
 
-		sf::RectangleShape floorShape(sf::Vector2f(1280, 310));
-		floorShape.setPosition(sf::Vector2f(0, 720 - 310));
-		floorShape.setFillColor(sf::Color(30, 30, 30));
+		sf::RectangleShape background(sf::Vector2f(1280, 720));
+		background.setFillColor(sf::Color(3, 252, 232));
 
+		sf::RectangleShape floorShape(sf::Vector2f(1280, 360));
+		floorShape.setPosition(sf::Vector2f(0, 720 - 360));
+		floorShape.setFillColor(sf::Color(166, 166, 166));
+
+		(*app).draw(background);
 		(*app).draw(floorShape);
 
 		for (int i = 0; i < gv::RenderScreen.size(); i++) (*app).draw(*gv::RenderScreen[i]);

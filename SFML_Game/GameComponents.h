@@ -82,9 +82,9 @@ namespace gc {
 	private:
 
 		void ADDLEN(sf::Vector2f* LAPPOS, std::vector<float>* LENS) {
-			if (LAPPOS->x != 0 && LAPPOS->y != 0) {
-				LENS->push_back(mathf::vector::len(mathf::vector::create(pos, *LAPPOS)));
-			}
+			if (LAPPOS->x == 0 && LAPPOS->y == 0) return;
+
+			LENS->push_back(mathf::vector::len(mathf::vector::create(pos, *LAPPOS)));
 		}
 
 		void CAST() {
@@ -101,7 +101,6 @@ namespace gc {
 			{
 				Line l0(pos, posLen);
 				Line l1;
-
 				// up
 
 				l1 = Line

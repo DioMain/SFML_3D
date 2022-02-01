@@ -11,7 +11,7 @@ namespace map {
 	const int MAP_SIZE_X = 10;
 	const int MAP_SIZE_Y = 9;
 
-	static float TILE = 100;
+	static float TILE = 200;
 
 	static std::string CHAR_MAP[MAP_SIZE_Y]{
 		{"##########"},
@@ -61,12 +61,12 @@ namespace map {
 				(*gv::RenderScreen[i]).setSize(sf::Vector2f((*gv::RenderScreen[i]).getSize().x, h));
 			else 
 				(*gv::RenderScreen[i]).setSize(sf::Vector2f((*gv::RenderScreen[i]).getSize().x, 0));
-			
-			if (h > 200) (*gv::RenderScreen[i]).setFillColor(sf::Color(0 + (h / 3), 0 + (h / 5), 0));
-			else if (h > 150) (*gv::RenderScreen[i]).setFillColor(sf::Color(0 + (h / 6), 0 + (h / 8), 0));
-			else (*gv::RenderScreen[i]).setFillColor(sf::Color(0 + (h / 10), 0 + (h / 12), 0));
 
-			(*gv::RenderScreen[i]).setPosition(sf::Vector2f((*gv::RenderScreen[i]).getPosition().x, 360 - ((*gv::RenderScreen[i]).getSize().y / 2)));
+			if (h >= 720) gv::RenderScreen[i]->setSize(sf::Vector2f(gv::RenderScreen[i]->getSize().x, 720));
+
+			gv::RenderScreen[i]->setPosition(sf::Vector2f(gv::RenderScreen[i]->getPosition().x, 360 - (gv::RenderScreen[i]->getSize().y / 2)));
+
+			gv::RenderScreen[i]->setFillColor(sf::Color(255, 162 + (93 / (h / 30)), 0 + (255 / (h / 50))));
 		}
 	}
 }
